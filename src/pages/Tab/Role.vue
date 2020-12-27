@@ -1,24 +1,26 @@
 <template>
   <div>
-    <databox 
-			title="Role" 
-			:crud="['create', 'update', 'delete', 'read']" 
-			:editablescol="[]"
-			:rows="roles" 
-			:columns="columns"
-			@onAdd="onAdd"
-			@delete="onDelete"
-		>
-			<template v-slot:create-dialog-body>
-				<div class="row q-gutter-sm">
-					<div class="col">
-						<q-input outlined v-model="form.name" label="Name" />
-					</div>
-				</div>
-			</template>
-
-		</databox>
-
+    <databox
+      title="Role"
+      :crud="['create', 'update', 'delete', 'read']"
+      :editablescol="[]"
+      :rows="roles"
+      :columns="columns"
+      @onAdd="onAdd"
+      @delete="onDelete"
+    >
+      <template v-slot:create-dialog-body>
+        <div class="row q-gutter-sm">
+          <div class="col">
+            <q-input
+              v-model="form.name"
+              outlined
+              label="Name"
+            />
+          </div>
+        </div>
+      </template>
+    </databox>
   </div>
 </template>
 
@@ -27,6 +29,10 @@ import Databox from '../../components/Databox'
 import Role from './../../models/Role'
 
 export default {
+
+  components: {
+    Databox
+  },
   data() {
     return {
       columns: [
@@ -51,16 +57,12 @@ export default {
     this.$store.dispatch('GetAllRoles')
   },
 
-  components: {
-    Databox
-  },
-
   methods: {
     onDelete(id) {
       this.$store.dispatch('DeleteRole', id)
     },
     onAdd() {
-	    this.$store.dispatch('AddRole', this.form)
+      this.$store.dispatch('AddRole', this.form)
     },
 
   }

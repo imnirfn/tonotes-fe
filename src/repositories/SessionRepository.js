@@ -3,8 +3,7 @@ import datasource from '../datasources/baljs-rest-api'
 import Repository from './Repository'
 
 export default class SessionRepository extends Repository {
-
-  constructor () {
+  constructor() {
     super(Session, datasource)
   }
 

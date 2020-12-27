@@ -10,7 +10,7 @@ const session = {
 
   actions: {
 
-    GetAllSessions () {
+    GetAllSessions() {
       return new Promise((resolve, reject) => {
         this.$repository.session.listing()
           .then(res => {
@@ -25,7 +25,7 @@ const session = {
     },
 
     DeleteSession({ commit }, id) {
-      return new Promise(async (resolve, reject) => {
+      return new Promise(async(resolve, reject) => {
         this.$repository.session.delete(id)
           .then(res => {
             Session.delete(id)

@@ -56,7 +56,6 @@ const routes = [
     component: () => import('pages/Auth/Login.vue')
   },
 
-
   // {
   //   path: '/first-time-registration',
   //   meta: {

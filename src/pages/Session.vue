@@ -4,18 +4,18 @@
       <q-breadcrumbs>
         <q-breadcrumbs-el label="Home" to="/" />
         <q-breadcrumbs-el label="Session Management" />
-        <q-breadcrumbs-el label="Session" v-if="data.tabs === 'session'" />
-        <q-breadcrumbs-el label="Templates" v-if="data.tabs === 'templates'" />
+        <q-breadcrumbs-el v-if="data.tabs === 'session'" label="Session" />
+        <q-breadcrumbs-el v-if="data.tabs === 'templates'" label="Templates" />
       </q-breadcrumbs>
     </div>
 
     <div class="q-pa-md">
       <div class="q-gutter-y-md">
         <q-tabs
+          v-model="data.tabs"
           narrow-indicator
           dense
           align="left"
-          v-model="data.tabs"
           class="text-primary"
         >
           <q-tab name="session" label="Session" />
@@ -24,10 +24,7 @@
       </div>
     </div>
 
-    <div v-if="data.tabs === 'session'" class="flex flex-center">
- 
-    </div>
-
+    <div v-if="data.tabs === 'session'" class="flex flex-center" />
   </div>
 </template>
 

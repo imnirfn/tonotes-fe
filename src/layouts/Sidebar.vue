@@ -16,7 +16,6 @@
         :icon="link.meta.icon"
       />
     </q-list>
-
   </div>
 </template>
 
@@ -25,6 +24,10 @@ import EssentialLink from '../components/EssentialLink'
 import { mapGetters } from 'vuex'
 
 export default {
+
+  components: {
+    EssentialLink
+  },
   data() {
     return {
     }
@@ -35,9 +38,5 @@ export default {
       'menus'
     ])
   },
-
-  components: {
-    EssentialLink
-  }
 }
 </script>

@@ -3,7 +3,7 @@ import Zone from './../models/Zone'
 import datasource from '../datasources/baljs-rest-api'
 
 export default class ZoneRepository extends Repository {
-  constructor () {
+  constructor() {
     super(Zone, datasource)
   }
 }

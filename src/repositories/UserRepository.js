@@ -4,8 +4,7 @@ import User from './../models/User'
 import qs from 'qs'
 
 export default class UserRepository extends Repository {
-
-  constructor () {
+  constructor() {
     super(User, datasource)
   }
 
@@ -30,7 +29,7 @@ export default class UserRepository extends Repository {
     return response
   }
 
-  async login (email, password) {
+  async login(email, password) {
     const response = await datasource({
       method: 'post',
       url: `${User.entity}/login`,

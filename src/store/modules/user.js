@@ -30,7 +30,7 @@ const user = {
   },
 
   actions: {
-    Login ({ commit }, userInfo) {
+    Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         this.$repository.user.login(userInfo.email, userInfo.password)
           .then(res => {
@@ -42,11 +42,10 @@ const user = {
             console.log(err)
             reject(err)
           })
-
       })
     },
 
-    GetInfo ({ commit }) {
+    GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
         this.$repository.user.getInfo()
           .then(res => {
@@ -62,7 +61,7 @@ const user = {
       })
     },
 
-    Logout ({ commit }) {
+    Logout({ commit }) {
       return new Promise((resolve) => {
         this.$repository.user.logout()
         commit('SET_ROLES', [])
@@ -92,7 +91,7 @@ const user = {
           .then(res => {
             resolve(res.data)
             User.insert({ data: res.data })
-            dispatch('GetAllUsers')
+            // dispatch('GetAllUsers')
           })
           .catch(err => {
             reject(err)
@@ -118,20 +117,19 @@ const user = {
           .then(res => {
             resolve(res)
             User.delete(id)
-            dispatch('GetAllUsers')
+            // dispatch('GetAllUsers')
           })
           .catch(err => {
             reject(err)
           })
       })
-
     },
 
     async GetUserRoles({ commit }, id) {
-      let res = await this.$repository.user.getUserRoles(id)
+      const res = await this.$repository.user.getUserRoles(id)
       const data = res.data
-      
-      for (let role of data) {
+
+      for (const role of data) {
         await UserRole.create({
           data: {
             roleId: role.uuid,
@@ -144,12 +142,12 @@ const user = {
     },
 
     async AssignUserRole({ commit }, data) {
-      let res = await this.$repository.user.assignUserRoles(data.userId, data.roleId)
+      const res = await this.$repository.user.assignUserRoles(data.userId, data.roleId)
       return res.data
     },
 
     async UnassignUserRole({ commit }, data) {
-      let res = await this.$repository.user.unassignUserRoles(data.userId, data.roleId)
+      const res = await this.$repository.user.unassignUserRoles(data.userId, data.roleId)
       return res.data
     }
   }

@@ -1,5 +1,4 @@
 export default class Repository {
-
   constructor(model, datasource) {
     this.model = model
     this.datasource = datasource
@@ -29,10 +28,6 @@ export default class Repository {
         }
       }
     )
-  }
-
-  async delete(id) {
-    return await this.datasource.delete(`${this.model.entity}/${id}`)
   }
 
   async delete(id) {

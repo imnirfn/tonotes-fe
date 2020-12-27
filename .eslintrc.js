@@ -60,7 +60,7 @@ module.exports = {
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 
-    'vue/max-attributes-per-line': ["error", {
+    'vue/max-attributes-per-line': ['error', {
       'singleline': 2,
       'multiline': {
         'max': 1,

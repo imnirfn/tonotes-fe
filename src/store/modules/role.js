@@ -1,16 +1,16 @@
 import Role from './../../models/Role'
 
 const zone = {
-	state: {
+  state: {
 
-	},
+  },
 
-	mutations: {
+  mutations: {
 
-	},
+  },
 
-	actions: {
-		GetAllRoles() {
+  actions: {
+    GetAllRoles() {
       return new Promise((resolve, reject) => {
         this.$repository.role.listing()
           .then(res => {
@@ -22,10 +22,10 @@ const zone = {
             reject(err)
           })
       })
-		},
-		
-		AddRole({ commit }, data) {
-			return new Promise((resolve, reject) => {
+    },
+
+    AddRole({ commit }, data) {
+      return new Promise((resolve, reject) => {
         this.$repository.role.create(data)
           .then(res => {
             Role.insert({ data: res.data })
@@ -36,10 +36,10 @@ const zone = {
             reject(err)
           })
       })
-		},
+    },
 
-		DeleteRole({ commit }, id) {
-			return new Promise(async (resolve, reject) => {
+    DeleteRole({ commit }, id) {
+      return new Promise(async(resolve, reject) => {
         this.$repository.role.delete(id)
           .then(res => {
             Role.delete(id)
@@ -49,8 +49,8 @@ const zone = {
             reject(err)
           })
       })
-		}
-	}
+    }
+  }
 }
 
 export default zone

@@ -4,19 +4,19 @@
       <q-breadcrumbs>
         <q-breadcrumbs-el label="Home" to="/" />
         <q-breadcrumbs-el label="User Management" />
-        <q-breadcrumbs-el label="List" v-if="data.tabs === 'list'" />
-        <q-breadcrumbs-el label="User Session" v-if="data.tabs === 'session'" />
-        <q-breadcrumbs-el label="Role" v-if="data.tabs === 'role'" />
+        <q-breadcrumbs-el v-if="data.tabs === 'list'" label="List" />
+        <q-breadcrumbs-el v-if="data.tabs === 'session'" label="User Session" />
+        <q-breadcrumbs-el v-if="data.tabs === 'role'" label="Role" />
       </q-breadcrumbs>
     </div>
 
     <div class="q-pa-md">
       <div class="q-gutter-y-md">
         <q-tabs
+          v-model="data.tabs"
           narrow-indicator
           dense
           align="left"
-          v-model="data.tabs"
           class="text-primary"
         >
           <q-tab name="list" label="Users" />
@@ -37,7 +37,6 @@
     <div v-if="data.tabs === 'role'" class="flex flex-center">
       <rolebox />
     </div>
-
   </div>
 </template>
 
@@ -47,18 +46,18 @@ import Userbox from './Tab/User'
 import UserSessionbox from './Tab/UserSession'
 
 export default {
+
+  components: {
+    Rolebox,
+    Userbox,
+    UserSessionbox,
+  },
   data() {
     return {
       data: {
         tabs: 'list'
       },
     }
-  },
-
-  components: {
-    Rolebox,
-    Userbox,
-    UserSessionbox,
   },
 }
 </script>

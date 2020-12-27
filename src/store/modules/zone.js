@@ -1,16 +1,16 @@
 import Zone from './../../models/Zone'
 
 const zone = {
-	state: {
+  state: {
 
-	},
+  },
 
-	mutations: {
+  mutations: {
 
-	},
+  },
 
-	actions: {
-		GetAllZones() {
+  actions: {
+    GetAllZones() {
       return new Promise((resolve, reject) => {
         this.$repository.zone.listing()
           .then(res => {
@@ -22,10 +22,10 @@ const zone = {
             reject(err)
           })
       })
-		},
-		
-		AddZone({ commit }, data) {
-			return new Promise((resolve, reject) => {
+    },
+
+    AddZone({ commit }, data) {
+      return new Promise((resolve, reject) => {
         this.$repository.zone.create(data)
           .then(res => {
             Zone.insert({ data: res.data })
@@ -36,10 +36,10 @@ const zone = {
             reject(err)
           })
       })
-		},
+    },
 
-		DeleteZone({ commit }, id) {
-			return new Promise(async (resolve, reject) => {
+    DeleteZone({ commit }, id) {
+      return new Promise(async(resolve, reject) => {
         this.$repository.zone.delete(id)
           .then(res => {
             Zone.delete(id)
@@ -49,8 +49,8 @@ const zone = {
             reject(err)
           })
       })
-		}
-	}
+    }
+  }
 }
 
 export default zone

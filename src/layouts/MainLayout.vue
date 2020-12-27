@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+// import EssentialLink from 'components/EssentialLink.vue'
 import Sidebar from './Sidebar'
 
 const linksData = [
@@ -81,12 +81,12 @@ const linksData = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
   }
-];
+]
 
 export default {
   name: 'MainLayout',
   components: { Sidebar },
-  data () {
+  data() {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData

@@ -1,23 +1,25 @@
 <template>
   <div>
-    <databox 
-			title="Zone" 
-			:crud="['create', 'update', 'delete', 'read']" 
-			:editablescol="[]"
-			:rows="zones" 
-			:columns="columns"
-			@onAdd="onAdd"
-		>
-			<template v-slot:create-dialog-body>
-				<div class="row q-gutter-sm">
-					<div class="col">
-						<q-input outlined v-model="form.name" label="Name" />
-					</div>
-				</div>
-			</template>
-
-		</databox>
-
+    <databox
+      title="Zone"
+      :crud="['create', 'update', 'delete', 'read']"
+      :editablescol="[]"
+      :rows="zones"
+      :columns="columns"
+      @onAdd="onAdd"
+    >
+      <template v-slot:create-dialog-body>
+        <div class="row q-gutter-sm">
+          <div class="col">
+            <q-input
+              v-model="form.name"
+              outlined
+              label="Name"
+            />
+          </div>
+        </div>
+      </template>
+    </databox>
   </div>
 </template>
 
@@ -26,6 +28,10 @@ import Databox from '../../components/Databox'
 import Zone from './../../models/Zone'
 
 export default {
+
+  components: {
+    Databox
+  },
   data() {
     return {
       columns: [
@@ -50,16 +56,12 @@ export default {
     this.$store.dispatch('GetAllZones')
   },
 
-  components: {
-    Databox
-  },
-
   methods: {
     onDelete(id) {
       this.$store.dispatch('DeleteZone', id)
     },
     onAdd() {
-			this.$store.dispatch('AddZone', this.form)
+      this.$store.dispatch('AddZone', this.form)
     },
 
   }

@@ -1,14 +1,13 @@
 <template>
   <div>
-    <databox 
-      title="User Sessions" 
-      :crud="['delete', 'read']" 
+    <databox
+      title="User Sessions"
+      :crud="['delete', 'read']"
       :editablescol="['session']"
-      :rows="sessions" 
+      :rows="sessions"
       :columns="columns"
       @delete="onDelete"
-    >
-    </databox>
+    />
   </div>
 </template>
 
@@ -17,6 +16,10 @@ import Databox from '../../components/Databox'
 import Session from './../../models/Session'
 
 export default {
+
+  components: {
+    Databox
+  },
   data() {
     return {
       data: {
@@ -39,10 +42,6 @@ export default {
 
   created() {
     this.$store.dispatch('GetAllSessions')
-  },
-
-  components: {
-    Databox
   },
 
   methods: {

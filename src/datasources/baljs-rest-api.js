@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   config => {
-    if(getToken(process.env.MAIN_BE_TOKEN)) {
+    if (getToken(process.env.MAIN_BE_TOKEN)) {
       config.headers['Authorization'] = 'Bearer ' + getToken(process.env.MAIN_BE_TOKEN)
     }
 
