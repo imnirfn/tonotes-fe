@@ -11,11 +11,17 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
-          Admin
-        </q-toolbar-title>
+        <q-toolbar-title />
 
-        <div>v0.01</div>
+        <div>
+          <q-btn
+            flat
+            class="text-white"
+            @click="onClickLogout"
+          >
+            Logout
+          </q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -28,69 +34,29 @@
       <sidebar />
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container style="background-color: #fafafa;">
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-// import EssentialLink from 'components/EssentialLink.vue'
 import Sidebar from './Sidebar'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
 
 export default {
   name: 'MainLayout',
   components: { Sidebar },
   data() {
     return {
-      leftDrawerOpen: false,
-      essentialLinks: linksData
+      leftDrawerOpen: false
     }
-  }
+  },
+
+  methods: {
+    onClickLogout() {
+      this.$store.dispatch('Logout')
+      this.$router.push('/login')
+    }
+  },
 }
 </script>

@@ -5,6 +5,7 @@
     <div class="fullscreen flex flex-center">
       <q-card class="q-pa-md" style="width:400px;">
         <div class="text-weight-bold text-center q-pb-lg q-gutter-sm">
+          <q-img class="q-mb-md" src="~assets/tagline.png" />
           <div class="text-h4 text-primary">
             Create Account
           </div>

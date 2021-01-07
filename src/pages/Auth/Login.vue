@@ -1,79 +1,83 @@
 <template>
-  <div>
-    <div class="fullscreen column bg-blue text-white">
-      <div class="col-2 q-pa-lg flex flex-center">
-        TONOTES
-      </div>
-      <div class="col item-centers text-center q-pa-md flex flex-center">
-        <div>
-          <form class="q-col-gutter-y-md">
-            <q-input
-              ref="email"
-              v-model.trim="form.email"
-              dark
-              outlined
-              standout
-              label="Email"
-              color="text-white"
-              :error="$v.form.email.$error"
-              error-message="Need a valid email"
+  <div class="fullscreen row">
+    <div class="col" />
+    <div class="col bg-primary" />
+    <div class="fullscreen flex flex-center">
+      <q-card class="q-pa-md" style="width:400px;">
+        <div class="text-weight-bold text-center q-pb-lg q-gutter-sm">
+          <q-img class="q-mb-md" src="~assets/tagline.png" />
+          <div class="text-h4 text-primary">
+            Hello!
+          </div>
+          <div class="text-caption">
+            Sign In to your account
+          </div>
+        </div>
+
+        <div class="q-gutter-sm">
+          <q-input
+            ref="email"
+            v-model.trim="form.email"
+            filled
+            standout
+            label="Email"
+            color="text-white"
+            :error="$v.form.email.$error"
+            error-message="Need a valid email"
+          />
+
+          <q-input
+            ref="password"
+            v-model="form.password"
+            filled
+            standout
+            label="Password"
+            color="text-white"
+            :type="type"
+            :error="$v.form.password.$error"
+            error-message="Password is required"
+            bottom-slots
+            @keyup.enter="login"
+          >
+            <template v-slot:append>
+              <q-btn
+                round
+                flat
+                icon="remove_red_eye"
+                @click="onClickShowPassword"
+              />
+            </template>
+          </q-input>
+
+          <div class="q-gutter-sm flex flex-center">
+            <q-btn
+              color="primary"
+              text-color="white"
+              label="Sign In"
+              no-caps
+              @click="login"
+            />
+            <q-btn
+              color="primary"
+              text-color="primary"
+              outline
+              unelevated
+              to="/register"
+              label="Create Account"
+              no-caps
             />
 
-            <q-input
-              ref="password"
-              v-model="form.password"
-              dark
-              outlined
-              standout
-              label="Password"
-              color="text-white"
-              :type="type"
-              :error="$v.form.password.$error"
-              error-message="Password is required"
-              bottom-slots
-              @keyup.enter="login"
-            >
-              <template v-slot:append>
-                <q-btn
-                  round
-                  flat
-                  icon="remove_red_eye"
-                  @click="onClickShowPassword"
-                />
-              </template>
-            </q-input>
-
-            <div class="q-gutter-sm">
-              <q-btn
-                color="white"
-                text-color="blue"
-                label="Sign In"
-                no-caps
-                @click="login"
-              />
-              <q-btn
-                color="white"
-                text-color="white"
-                outline
-                unelevated
-                to="/register"
-                label="Create Account"
-                no-caps
-              />
-            </div>
-            <div class="q-mt-sm">
-              <q-btn
-                color="white"
-                text-color="white"
-                flat
-                to="/forget"
-                label="I forgot my password"
-                no-caps
-              />
-            </div>
-          </form>
+            <q-btn
+              color="primary"
+              text-color="primary"
+              flat
+              to="/forget"
+              label="I forgot my password"
+              no-caps
+            />
+          </div>
         </div>
-      </div>
+      </q-card>
     </div>
   </div>
 </template>
