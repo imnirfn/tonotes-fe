@@ -34,7 +34,7 @@
       <sidebar />
     </q-drawer>
 
-    <q-page-container style="background-color: #fafafa;">
+    <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>

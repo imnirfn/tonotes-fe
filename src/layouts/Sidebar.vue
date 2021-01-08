@@ -5,7 +5,7 @@
         <q-img
           src="~assets/tagline.png"
           width="240px"
-          height="40px"
+          height="60px"
         />
       </q-item>
 
