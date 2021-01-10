@@ -49,6 +49,18 @@ const notes = {
             reject(err)
           })
       })
+    },
+
+    EditComplete({ commit }, data) {
+      return new Promise(async(resolve, reject) => {
+        this.$repository.notes.editComplete(data)
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   }
 }

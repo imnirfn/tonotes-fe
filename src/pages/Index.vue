@@ -14,41 +14,145 @@
         @click="showNotesDialog.show = true"
       />
     </q-page-sticky>
-    <q-list
-      v-for="note in notes"
-      :key="note.uuid"
-      dense
-      bordered
-      padding
-      class="rounded-borders q-mt-lg"
-    >
-      <q-item>
-        <div>
-          <div>
-            <q-chip
-              class=""
-              color="positive"
-              text-color="white"
-            >
-              {{ note.title }}
-            </q-chip>
-            <q-chip
-              v-if="note.category !== ''"
-              color="primary"
-              text-color="white"
-            >
-              {{ note.category }}
-            </q-chip>
+    <div class="text-h5 q-ml-md">
+      Pending
+    </div>
+    <div class="flex">
+      <q-card
+        v-for="note in notes.filter(note => !note.isComplete)"
+        :key="note.uuid"
+        flat
+        bordered
+        class="my-card q-ml-md q-mt-md"
+        style="width: 300px"
+      >
+        <q-card-section>
+          <div class="row items-center no-wrap">
+            <div class="col">
+              <div class="text-h6">
+                {{ note.title }}
+              </div>
+              <q-chip
+                color="secondary"
+                text-color="white"
+              >
+                By {{ users.filter(user => user.uuid === note.userId)[0].name }}
+              </q-chip>
+            </div>
+
+            <div class="col-auto">
+              <q-btn
+                color="grey-7"
+                round
+                flat
+                icon="more_vert"
+              >
+                <q-menu cover auto-close>
+                  <q-list>
+                    <q-item clickable>
+                      <q-item-section @click="onDeleteNotes">
+                        Remove Notes
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
+            </div>
           </div>
-          <q-item-section>
-            {{ note.description }}
-          </q-item-section>
-        </div>
-      </q-item>
-    </q-list>
+        </q-card-section>
+
+        <q-card-section>
+          {{ note.description }}
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-actions>
+          <q-btn flat>
+            Edit
+          </q-btn>
+          <q-btn
+            class="text-positive"
+            flat
+            @click="onClickComplete(note.uuid)"
+          >
+            Mark as complete
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+    </div>
+    <div class="text-h5 q-ml-md q-mt-lg">
+      Completed
+    </div>
+    <div class="flex">
+      <q-card
+        v-for="note in notes.filter(note => note.isComplete)"
+        :key="note.uuid"
+        flat
+        bordered
+        class="my-card q-ml-md q-mt-md"
+        style="width: 300px"
+      >
+        <q-card-section>
+          <div class="row items-center no-wrap">
+            <div class="col">
+              <div class="text-h6">
+                {{ note.title }}
+              </div>
+              <q-chip
+                color="secondary"
+                text-color="white"
+              >
+                By {{ users.filter(user => user.uuid === note.userId)[0].name }}
+              </q-chip>
+            </div>
+
+            <div class="col-auto">
+              <q-btn
+                color="grey-7"
+                round
+                flat
+                icon="more_vert"
+              >
+                <q-menu cover auto-close>
+                  <q-list>
+                    <q-item clickable>
+                      <q-item-section @click="onDeleteNotes">
+                        Remove Notes
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
+            </div>
+          </div>
+        </q-card-section>
+
+        <q-card-section>
+          {{ note.description }}
+        </q-card-section>
+
+        <q-separator />
+
+        <q-card-actions>
+          <q-btn flat>
+            Edit
+          </q-btn>
+          <q-btn
+            class="text-negative"
+            flat
+            @click="onClickInComplete(note.uuid)"
+          >
+            Mark as incomplete
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+    </div>
     <q-dialog
       v-model="showNotesDialog.show"
-      position="bottom"
+      position="right"
+      style="width: 400px"
+      full-height
       full-width
     >
       <q-card>
@@ -70,12 +174,6 @@
               class="q-mt-md"
               outlined
               label="Descriptions"
-            />
-            <q-input
-              v-model="form.category"
-              class="q-mt-md"
-              outlined
-              label="Category"
             />
           </div>
         </q-card-section>
@@ -115,7 +213,8 @@ export default {
         ip: 'localhost',
         port: '13338'
       },
-      notes: []
+      notes: [],
+      users: []
     }
   },
 
@@ -125,6 +224,9 @@ export default {
 
     res = await this.$store.dispatch('GetAllNotes')
     this.notes = res
+
+    res = await this.$store.dispatch('GetAllUsers')
+    this.users = res
 
     // this.connect()
   },
@@ -145,6 +247,33 @@ export default {
       try {
         const res = await this.$store.dispatch('AddNotes', this.form)
         console.log(res)
+        this.notes = await this.$store.dispatch('GetAllNotes')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async onClickComplete(uuid) {
+      try {
+        await this.$store.dispatch('EditComplete', { uuid: uuid, isComplete: true })
+        this.notes = await this.$store.dispatch('GetAllNotes')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async onClickInComplete(uuid) {
+      try {
+        await this.$store.dispatch('EditComplete', { uuid: uuid, isComplete: false })
+        this.notes = await this.$store.dispatch('GetAllNotes')
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async onClickEdit(uuid) {
+      try {
+        await this.$store.dispatch('EditComplete', { uuid: uuid, data: this.form })
         this.notes = await this.$store.dispatch('GetAllNotes')
       } catch (e) {
         console.log(e)
