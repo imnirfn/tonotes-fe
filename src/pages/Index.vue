@@ -1,5 +1,11 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="">
+    <div class="q-pa-md q-gutter-sm">
+      <q-breadcrumbs>
+        <q-breadcrumbs-el label="Home" to="/" />
+        <q-breadcrumbs-el label="Notes" />
+      </q-breadcrumbs>
+    </div>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
       <q-btn
         fab
@@ -8,6 +14,38 @@
         @click="showNotesDialog.show = true"
       />
     </q-page-sticky>
+    <q-list
+      v-for="note in notes"
+      :key="note.uuid"
+      dense
+      bordered
+      padding
+      class="rounded-borders q-mt-lg"
+    >
+      <q-item>
+        <div>
+          <div>
+            <q-chip
+              class=""
+              color="positive"
+              text-color="white"
+            >
+              {{ note.title }}
+            </q-chip>
+            <q-chip
+              v-if="note.category !== ''"
+              color="primary"
+              text-color="white"
+            >
+              {{ note.category }}
+            </q-chip>
+          </div>
+          <q-item-section>
+            {{ note.description }}
+          </q-item-section>
+        </div>
+      </q-item>
+    </q-list>
     <q-dialog
       v-model="showNotesDialog.show"
       position="bottom"
@@ -74,7 +112,8 @@ export default {
       },
       ip: 'localhost',
       port: '13338',
-      socket: null
+      socket: null,
+      notes: []
     }
   },
 
@@ -83,7 +122,7 @@ export default {
     this.form.userId = res.user
 
     res = await this.$store.dispatch('GetAllNotes')
-    console.log(res)
+    this.notes = res
 
     // this.connect()
   },
@@ -99,8 +138,13 @@ export default {
     },
 
     async onClickAddNotes() {
-      const res = await this.$store.dispatch('AddNotes', this.form)
-      console.log(res)
+      try {
+        const res = await this.$store.dispatch('AddNotes', this.form)
+        console.log(res)
+        this.notes = await this.$store.dispatch('GetAllNotes')
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
 }
