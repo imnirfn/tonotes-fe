@@ -16,7 +16,7 @@ const routes = [
         path: 'session',
         meta: {
           title: 'Session Management',
-          roles: [],
+          roles: ['master'],
           sidebar: true,
           icon: 'school'
         },
@@ -26,7 +26,7 @@ const routes = [
         path: 'user',
         meta: {
           title: 'User Management',
-          roles: [],
+          roles: ['master'],
           sidebar: true,
           icon: 'school'
         },
@@ -36,7 +36,7 @@ const routes = [
         path: 'asset',
         meta: {
           title: 'Asset Management',
-          roles: [],
+          roles: ['master'],
           sidebar: true,
           icon: 'school'
         },
