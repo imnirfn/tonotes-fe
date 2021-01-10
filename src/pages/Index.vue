@@ -156,13 +156,11 @@
       full-width
     >
       <q-card>
-        <q-card-section>
-          <div class="text-h6">
-            Add new notes
-          </div>
-        </q-card-section>
+        <q-banner class="bg-primary text-white" full-width>
+          Add new Notes
+        </q-banner>
 
-        <q-card-section class="row q-pt-none">
+        <q-card-section class="row q-pt-none q-mt-md">
           <div class="col">
             <q-input
               v-model="form.title"
