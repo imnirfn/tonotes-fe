@@ -1,16 +1,21 @@
 {
   "name": "tonotes-fe",
   "version": "0.0.1",
-  "description": "Notes and files sharing app",
-  "productName": "Tonotes",
-  "author": "imnirfn <s3ns3xy@yahoo.com>",
   "private": true,
+  "description": "Notes and files sharing app",
+  "author": "imnirfn <s3ns3xy@yahoo.com>",
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
     "test": "echo \"No test specified\" && exit 0"
   },
+  "main": "background.js",
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@vue/cli-service": "^4.5.10",
     "@vuex-orm/core": "^0.36.3",
     "axios": "^0.18.1",
     "core-js": "^3.6.5",
@@ -26,10 +31,13 @@
     "@quasar/app": "^2.0.0",
     "@quasar/quasar-app-extension-dotenv": "^1.0.5",
     "babel-eslint": "^10.0.1",
+    "electron": "^9.0.0",
+    "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-loader": "^3.0.3",
-    "eslint-plugin-vue": "^6.1.2"
+    "eslint-plugin-vue": "^6.1.2",
+    "vue-cli-plugin-electron-builder": "~2.0.0-rc.5"
   },
   "browserslist": [
     "last 10 Chrome versions",
@@ -46,5 +54,6 @@
     "node": ">= 10.18.1",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
-  }
+  },
+  "productName": "Tonotes"
 }
