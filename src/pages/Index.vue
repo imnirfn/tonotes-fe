@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import net from 'net'
+// import net from 'net'
 
 export default {
   data() {
@@ -72,11 +72,9 @@ export default {
       showNotesDialog: {
         show: false
       },
-      socket: {
-        instance: null,
-        ip: 'localhost',
-        port: '13338'
-      }
+      ip: 'localhost',
+      port: '13338',
+      socket: null
     }
   },
 
@@ -87,17 +85,15 @@ export default {
     res = await this.$store.dispatch('GetAllNotes')
     console.log(res)
 
-    this.connect()
+    // this.connect()
   },
 
   methods: {
     async connect() {
-      const socket = new net.Socket()
-      this.socket.instance = socket
-      await this.socket.instance.connect(this.socket.port, this.socket.ip)
-      socket.on('data', (data) => {
-        const jsonstr = new TextDecoder('utf-8').decode(data)
-        const json = JSON.parse(jsonstr)
+      this.socket = new WebSocket('ws://192.168.0.120:13338')
+      // await this.socket.connect(this.port, this.ip)
+      this.socket.on('data', (data) => {
+        const json = JSON.parse(new TextDecoder('utf-8').decode(data))
         console.log(json)
       })
     },
