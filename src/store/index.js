@@ -9,6 +9,7 @@ import app from './modules/app'
 import session from './modules/session'
 import zone from './modules/zone'
 import role from './modules/role'
+import notes from './modules/notes'
 
 Vue.use(Vuex)
 
@@ -28,7 +29,8 @@ export default function(/* { ssrContext } */) {
       app,
       session,
       zone,
-      role
+      role,
+      notes
     },
     getters,
     plugins: [VuexORM.install(database)],
