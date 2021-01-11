@@ -225,13 +225,11 @@ export default {
 
     res = await this.$store.dispatch('GetAllUsers')
     this.users = res
-
-    // this.connect()
   },
 
   methods: {
     async connect() {
-      this.socket = new WebSocket('ws://192.168.0.120:13338')
+      this.socket = new WebSocket('ws://localhost:13338')
       // await this.socket.connect(this.port, this.ip)
       this.socket.on('data', (data) => {
         const json = JSON.parse(new TextDecoder('utf-8').decode(data))

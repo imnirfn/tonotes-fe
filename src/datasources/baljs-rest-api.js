@@ -6,6 +6,12 @@ const axiosInstance = axios.create({
   timeout: 5000
 })
 
+// const socket = new WebSocket('ws://localhost:13338')
+// socket.on('data', (data) => {
+//   const json = JSON.parse(new TextDecoder('utf-8').decode(data))
+//   console.log(json)
+// })
+
 axiosInstance.interceptors.request.use(
   config => {
     if (getToken(process.env.MAIN_BE_TOKEN)) {
